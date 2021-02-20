@@ -2,6 +2,7 @@
 
 DEFAULT_MSG="Hey, Yo!"
 ANOTHER_MSG="Check It Out! Yo!"
+DEFAULT_INTERVAL_SEC=1
 
 trap IWillNeverDie 15
 
@@ -24,6 +25,11 @@ IWillNeverDie () {
   fi
 }
 
+INTERVAL="${DEFAULT_INTERVAL_SEC}"
+if [ "x${INTERVAL_SEC}" != "x" ]; then
+  INTERVAL="${INTERVAL_SEC}"
+fi
+ 
 while true
 do
   MSG="${DEFAULT_MSG}"
@@ -34,5 +40,10 @@ do
     fi
   fi
   Output "$MSG"
-  sleep 1
+
+  if [ "x${ONE_TIME_HEY_YO}" != "x" ]; then
+    Output "Bye."
+    exit 0
+  fi
+  sleep "${INTERVAL}"
 done
